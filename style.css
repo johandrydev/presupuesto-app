@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  min-height: 100vh;
+  background: #87c3c7;
+  background: rgb(4,0,65);
+  background: linear-gradient(333deg, rgba(4,0,65,1) 0%, rgba(63,93,227,1) 45%, rgba(164,211,251,1) 94%);
+}
+
+.title {
+  color: white;
+  margin: 2rem 0 1rem;
+  text-align: center;
+}
+
+.title-card {
+  text-align: center;
+  margin: .5rem 0 1.2rem;
+  color: #004e92;
+}
+
+.btn-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 0;
+}
