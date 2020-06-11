@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 // Custom Components
-import InputMask from './InputMask'
+import InputMask from "./InputMask";
 // MaterialUI components
-import Button from '@material-ui/core/Button'
+import Button from "@material-ui/core/Button";
 
 /**
  * Component from Presupuesto
@@ -11,37 +11,37 @@ import Button from '@material-ui/core/Button'
  * @property saveRemaining function for save remaining
  * @property changeShow function for show component
  */
-const Presupuesto = ({saveBudge, saveRemaining, changeShow}) => {
+const Presupuesto = ({ saveBudge, saveRemaining, changeShow }) => {
   // state from budge
-  const [ value, setValue ] = useState('')
+  const [value, setValue] = useState("");
   // state from error budge
-  const [ errorInput, setError ] = useState(false)
+  const [errorInput, setError] = useState(false);
 
   // change value from budge
-  const handleChange = (e) => {
-    setValue(e.target.value)
-    if (e.target.value !== '') {
-      const quantity = parseFloat(e.target.value)
+  const handleChange = e => {
+    setValue(e.target.value);
+    if (e.target.value !== "") {
+      const quantity = parseFloat(e.target.value);
       if (quantity > 0) {
-        setError(false)
+        setError(false);
       } else {
-        setError(true)
+        setError(true);
       }
     }
-  }
+  };
   // send budge
   const handleSubmit = () => {
     // validate
-    if (value !== '' && parseFloat(value) > 0) {
-      setError(false)
-      const val = parseFloat(value)
-      saveBudge(val)
-      saveRemaining(val)
-      changeShow(false)
+    if (value !== "" && parseFloat(value) > 0) {
+      setError(false);
+      const val = parseFloat(value);
+      saveBudge(val);
+      saveRemaining(val);
+      changeShow(false);
     } else {
-      setError(true)
+      setError(true);
     }
-  }
+  };
 
   return (
     <div>
@@ -53,18 +53,24 @@ const Presupuesto = ({saveBudge, saveRemaining, changeShow}) => {
         val={value}
       />
       <div className="btn-form">
-        <Button variant="contained" color="primary" fullWidth disableElevation onClick={handleSubmit}>
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          disableElevation
+          onClick={handleSubmit}
+        >
           Definir Presupuesto
         </Button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 Presupuesto.propTypes = {
   saveBudge: PropTypes.func.isRequired,
   saveRemaining: PropTypes.func.isRequired,
   changeShow: PropTypes.func.isRequired
-}
+};
 
-export default Presupuesto
+export default Presupuesto;

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react"
-import PropTypes from 'prop-types'
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 // Custom Components
-import shortid from 'shortid'
-import InputMask from "./InputMask"
+import shortid from "shortid";
+import InputMask from "./InputMask";
 // MaterialUI components
-import Button from "@material-ui/core/Button"
-import TextField from "@material-ui/core/TextField"
-import { makeStyles } from "@material-ui/core/styles"
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,31 +20,31 @@ const useStyles = makeStyles(theme => ({
  * Component from Formulario
  * @property addGasto function add gasto to main state
  */
-const Formulario = ({addGasto}) => {
-  const classes = useStyles()
+const Formulario = ({ addGasto }) => {
+  const classes = useStyles();
   // state from mount
-  const [ value, setValue ] = useState('')
+  const [value, setValue] = useState("");
   // state from error mount
-  const [ errorInput, setError ] = useState(false)
+  const [errorInput, setError] = useState(false);
   // state from input name
-  const [ name, changeName ] = useState({
+  const [name, changeName] = useState({
     val: "",
     err: false,
     errTex: "Este campo es obligatorio"
   });
 
   // change mount input
-  const handleChange = (e) => {
-    setValue(e.target.value)
-    if (e.target.value !== '') {
-      const cantidad = parseFloat(e.target.value)
+  const handleChange = e => {
+    setValue(e.target.value);
+    if (e.target.value !== "") {
+      const cantidad = parseFloat(e.target.value);
       if (cantidad > 0) {
-        setError(false)
+        setError(false);
       } else {
-        setError(true)
+        setError(true);
       }
     }
-  }
+  };
   // change name input
   const handleChangeText = e => {
     changeName({
@@ -57,36 +57,36 @@ const Formulario = ({addGasto}) => {
   // save gasto
   const handleSave = () => {
     // validate
-    if (value !== '' && parseFloat(value) > 0 && name.val.trim() !== '') {
-      setError(false)
+    if (value !== "" && parseFloat(value) > 0 && name.val.trim() !== "") {
+      setError(false);
       const gasto = {
         id: shortid.generate(),
         name: name.val,
         mount: parseFloat(value)
-      }
+      };
       // send gasto to main component
-      addGasto(gasto)
+      addGasto(gasto);
       // reset form
-      setValue('')
+      setValue("");
       changeName({
         ...name,
-        val: '',
+        val: "",
         err: false
       });
-      setError(false)
+      setError(false);
     } else {
       // add form error
-      if (value === '' || parseFloat(value) <= 0) {
-        setError(true)
+      if (value === "" || parseFloat(value) <= 0) {
+        setError(true);
       }
-      if (name.val.trim() === '') {
+      if (name.val.trim() === "") {
         changeName({
           ...name,
           err: name.val.trim() === ""
         });
       }
     }
-  }
+  };
 
   return (
     <>
@@ -127,6 +127,6 @@ const Formulario = ({addGasto}) => {
 
 Formulario.propTypes = {
   addGasto: PropTypes.func.isRequired
-}
+};
 
 export default Formulario;

@@ -26,17 +26,17 @@ const App = () => {
     }
   }));
   const { cardPresupuesto } = useStyles();
-  const [ budget, changeBudget ] = useState(0);
-  const [ remaining, changeRemaining ] = useState(0);
-  const [ showQuestion, changeShowQ ] = useState(true);
-  const [ showErr, changeShowErr ] = useState(false);
-  const [ gastos, changeGastos ] = useState([]);
-  const [ open, changeOpen ] = useState(false);
+  const [budget, changeBudget] = useState(0);
+  const [remaining, changeRemaining] = useState(0);
+  const [showQuestion, changeShowQ] = useState(true);
+  const [showErr, changeShowErr] = useState(false);
+  const [gastos, changeGastos] = useState([]);
+  const [open, changeOpen] = useState(false);
 
   const addGasto = gasto => {
     if (gasto.mount <= remaining) {
       changeShowErr(false);
-      changeRemaining(remaining - gasto.mount)
+      changeRemaining(remaining - gasto.mount);
       return changeGastos([...gastos, gasto]);
     } else {
       changeShowErr(true);
@@ -44,42 +44,46 @@ const App = () => {
   };
 
   const handleAcept = () => {
-    changeOpen(!open)
-    changeShowQ(true)
-    changeBudget(0)
-    changeRemaining(0)
-    changeGastos([])
-  }
+    changeOpen(!open);
+    changeShowQ(true);
+    changeBudget(0);
+    changeRemaining(0);
+    changeGastos([]);
+  };
 
   const handleClose = () => {
-    changeOpen(!open)
-  }
+    changeOpen(!open);
+  };
 
   return (
     <Container component="main" maxWidth="md">
       <h1 className="title">Gasto Semanal</h1>
       <div className={cardPresupuesto}>
-       {showQuestion ? (
-         <Presupuesto
-          saveBudge={changeBudget}
-          saveRemaining={changeRemaining}
-          changeShow={changeShowQ}
-        />
-       ) : (
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
-            <Formulario addGasto={addGasto} />
-            {showErr && (
-              <Alert severity="error">
-                Debe cargar un gasto que corresponda al restante
-              </Alert>
-            )}
+        {showQuestion ? (
+          <Presupuesto
+            saveBudge={changeBudget}
+            saveRemaining={changeRemaining}
+            changeShow={changeShowQ}
+          />
+        ) : (
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <Formulario addGasto={addGasto} />
+              {showErr && (
+                <Alert severity="error">
+                  Debe cargar un gasto que corresponda al restante
+                </Alert>
+              )}
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <StatePresupuesto
+                presupuesto={budget}
+                restante={remaining}
+                resetPresupuesto={handleClose}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <StatePresupuesto presupuesto={budget} restante={remaining} resetPresupuesto={handleClose} />
-          </Grid>
-        </Grid>
-       )}
+        )}
       </div>
       {!showQuestion && <h3 className="title">Lista de Gastos</h3>}
       <Grid container spacing={3}>
@@ -87,7 +91,11 @@ const App = () => {
           <Gasto key={gasto.id} gasto={gasto} />
         ))}
       </Grid>
-      <AlertCustom open={open} handleClose={handleClose} handleAcept={handleAcept} />
+      <AlertCustom
+        open={open}
+        handleClose={handleClose}
+        handleAcept={handleAcept}
+      />
     </Container>
   );
 };

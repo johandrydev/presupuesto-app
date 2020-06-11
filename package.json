@@ -1,5 +1,5 @@
 {
-  "name": "react",
+  "name": "presupuesto-app",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
@@ -20,5 +20,7 @@
   },
   "devDependencies": {
     "react-scripts": "latest"
-  }
+  },
+  "keywords": [],
+  "description": ""
 }

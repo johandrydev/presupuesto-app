@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 // MaterialUI components
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
@@ -21,8 +21,8 @@ const useStyles = makeStyles(theme => ({
         margin: "1rem 0 0"
       }
     },
-    '& .btn': {
-      margin: '.5rem'
+    "& .btn": {
+      margin: ".5rem"
     },
     "& > * + *": {
       marginTop: theme.spacing(2)
@@ -49,7 +49,7 @@ const StatePresupuesto = ({ presupuesto, restante, resetPresupuesto }) => {
     } else {
       changeClsAlert("success");
     }
-  }, [restante]);
+  }, [restante, presupuesto]);
 
   return (
     <div className={classes.root}>
@@ -61,7 +61,13 @@ const StatePresupuesto = ({ presupuesto, restante, resetPresupuesto }) => {
           Restante: ${new Intl.NumberFormat("es-CO").format(restante)}
         </Alert>
       </div>
-      <Button className="btn" onClick={resetPresupuesto} variant="contained" color="secundary" fullWidth disableElevation>
+      <Button
+        className="btn"
+        onClick={resetPresupuesto}
+        variant="contained"
+        fullWidth
+        disableElevation
+      >
         Establecer nuevo presupuesto
       </Button>
     </div>
@@ -72,6 +78,6 @@ StatePresupuesto.propTypes = {
   presupuesto: PropTypes.number.isRequired,
   restante: PropTypes.number.isRequired,
   resetPresupuesto: PropTypes.func.isRequired
-}
+};
 
 export default StatePresupuesto;
